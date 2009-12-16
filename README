@@ -6,7 +6,7 @@ SYNOPSIS
       use Plack::Builder;
 
       builder {
-          enable 'RefererCheck', host => 'www.example.com', same_scheme => 1;
+          enable 'RefererCheck', host => 'www.example.com', same_scheme => 1, error_app => sub { [403, [], ['Forbidden']] };
           $app;
       };
  
@@ -19,6 +19,17 @@ SYNOPSIS
 
 DESCRIPTION
     Plack::Middleware::RefererCheck
+
+CONFIGURATION
+    host
+        Instead of using $env->{HTTP_HOST} if you set.
+
+    same_scheme
+        Check if you are setting "1" the same scheme.default: "0"
+
+    error_app
+        Is an PSGI-app that runs on errors.default: return 403 Forbidden
+        app.
 
 AUTHOR
     Masahiro Chiba
