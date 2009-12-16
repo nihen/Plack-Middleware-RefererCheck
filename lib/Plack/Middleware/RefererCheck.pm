@@ -43,7 +43,7 @@ Plack::Middleware::RefererCheck - check referer for defensive CSRF attack.
   use Plack::Builder;
 
   builder {
-      enable 'RefererCheck', host => 'www.example.com', same_scheme => 1;
+      enable 'RefererCheck', host => 'www.example.com', same_scheme => 1, error_app => sub { [403, [], ['Forbidden']] };
       $app;
   };
  
@@ -58,6 +58,24 @@ Plack::Middleware::RefererCheck - check referer for defensive CSRF attack.
 =head1 DESCRIPTION
  
 Plack::Middleware::RefererCheck
+
+=head1 CONFIGURATION
+
+=over 4
+
+=item host
+
+Instead of using $env->{HTTP_HOST} if you set.
+
+=item same_scheme
+
+Check if you are setting "1" the same scheme.default: "0"
+
+=item error_app
+
+Is an PSGI-app that runs on errors.default: return 403 Forbidden app.
+
+=back
  
 =head1 AUTHOR
  
