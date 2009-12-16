@@ -6,9 +6,6 @@ use Plack::Builder;
 use Plack::Test;
 use Cwd;
 
-use lib 't/lib';
-$Plack::Test::Impl = 'MockHTTP::ThroughScheme';
-
 my $default_handler = builder {
     enable "RefererCheck";
     sub { ['200', ['Content-Type' => 'text/html'], ['hello world']] };

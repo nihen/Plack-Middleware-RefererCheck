@@ -2,7 +2,7 @@ use inc::Module::Install;
 name 'Plack-Middleware-RefererCheck';
 all_from 'lib/Plack/Middleware/RefererCheck.pm';
 readme_from 'lib/Plack/Middleware/RefererCheck.pm';
-requires 'Plack::Middleware';
+requires 'Plack::Middleware' => '0.9023';
 build_requires 'Test::More';
 use_test_base;
 auto_include_deps;
