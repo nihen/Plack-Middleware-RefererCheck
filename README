@@ -1,0 +1,32 @@
+NAME
+    Plack::Middleware::RefererCheck - check referer for defensive CSRF
+    attack.
+
+SYNOPSIS
+      use Plack::Builder;
+
+      builder {
+          enable 'RefererCheck', host => 'www.example.com', same_scheme => 1;
+          $app;
+      };
+ 
+      or more simply(host from $env->{HTTP_HOST} and same_scheme => 0)
+      # this is vulnerabilly for DNS Rebinding
+      builder {
+          enable 'RefererCheck';
+          $app;
+      };
+
+DESCRIPTION
+    Plack::Middleware::RefererCheck
+
+AUTHOR
+    Masahiro Chiba
+
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+SEE ALSO
+    Plack::Middleware Plack::Builder
+
