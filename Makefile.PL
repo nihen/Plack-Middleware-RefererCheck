@@ -3,6 +3,7 @@ name 'Plack-Middleware-RefererCheck';
 all_from 'lib/Plack/Middleware/RefererCheck.pm';
 readme_from 'lib/Plack/Middleware/RefererCheck.pm';
 requires 'Plack' => '0.9023';
+requires 'parent';
 build_requires 'Test::More';
 use_test_base;
 auto_include_deps;
