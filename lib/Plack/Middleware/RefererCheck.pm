@@ -6,7 +6,7 @@ use parent qw(Plack::Middleware);
  
 __PACKAGE__->mk_accessors(qw(host same_scheme error_app no_warn));
  
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub prepare_app {
     my $self = shift;
