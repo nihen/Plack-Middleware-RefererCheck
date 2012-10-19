@@ -7,19 +7,19 @@ use Plack::Test;
 use Cwd;
 
 my $default_handler = builder {
-    enable "RefererCheck";
+    enable "RefererCheck", no_warn => 1;
     sub { ['200', ['Content-Type' => 'text/html'], ['hello world']] };
 };
 my $host_handler = builder {
-    enable "RefererCheck", host => 'www.example.com';
+    enable "RefererCheck", no_warn => 1, host => 'www.example.com';
     sub { ['200', ['Content-Type' => 'text/html'], ['hello world']] };
 };
 my $same_scheme_handler = builder {
-    enable "RefererCheck", same_scheme => 1;
+    enable "RefererCheck", no_warn => 1, same_scheme => 1;
     sub { ['200', ['Content-Type' => 'text/html'], ['hello world']] };
 };
 my $error_app_handler = builder {
-    enable "RefererCheck", error_app => sub {[500, [], ['Internal Server Error']]};
+    enable "RefererCheck", no_warn => 1, error_app => sub {[500, [], ['Internal Server Error']]};
     sub { ['200', ['Content-Type' => 'text/html'], ['hello world']] };
 };
 

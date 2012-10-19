@@ -4,9 +4,15 @@ use strict;
 use 5.008_001;
 use parent qw(Plack::Middleware);
  
-__PACKAGE__->mk_accessors(qw(host same_scheme error_app));
+__PACKAGE__->mk_accessors(qw(host same_scheme error_app no_warn));
  
 our $VERSION = '0.02';
+
+sub prepare_app {
+    my $self = shift;
+
+    warn('Plack::Middleware::RefererCheck WAS DEPRECATED!') unless $self->no_warn;
+}
 
 sub call {
     my($self, $env) = @_;
@@ -36,8 +42,8 @@ __END__
  
 =head1 NAME
  
-Plack::Middleware::RefererCheck - check referer for defensive CSRF attack.
- 
+Plack::Middleware::RefererCheck - check referer for defensive CSRF attack.(DEPRECATED)
+
 =head1 SYNOPSIS
  
   use Plack::Builder;
@@ -56,8 +62,13 @@ Plack::Middleware::RefererCheck - check referer for defensive CSRF attack.
 
 
 =head1 DESCRIPTION
+
+Please note that this module has been DEPRECATED.
+
+Because Referer is not required and RFC2616 strongly recommends that the user be able to select whether or not the field.
+
+Please use other way. For example L<Plack::Middleware::CSRFBlock>, L<Catalyst::Controller::RequestToken> and L<Amon2::Plugin::Web::CSRFDefender>.
  
-Plack::Middleware::RefererCheck
 
 =head1 CONFIGURATION
 
@@ -74,6 +85,10 @@ Check if you are setting "1" the same scheme.default: "0"
 =item error_app
 
 Is an PSGI-app that runs on errors.default: return 403 Forbidden app.
+
+=item no_warn
+
+mute DEPRECATED warnings.
 
 =back
  
